@@ -93,30 +93,30 @@ typeDataSelect.addEventListener('change', () => {
                     // Calcular el riesgo de contraer enfermedades respiratorias infecciosas
                     let NiveldeRiesgo = '';
                     let RecomendacionesRiesgo = '';
-                    let posiblesEnfermedades = '';
+                    let PosiblesEnfermedades = '';
 
                     if (pm10Value > 75 || pm25Value > 50) {
                         NiveldeRiesgo = 'Muy alto';
-                        posiblesEnfermedades = 'Posibles enfermedades: neumonía, bronquitis aguda, exacerbación del asma.';
+                        PosiblesEnfermedades = 'Posibles enfermedades: neumonía, bronquitis aguda, exacerbación del asma.';
                         RecomendacionesRiesgo = 'Las condiciones son desfavorables para las personas con enfermedades respiratorias. Evita salir al aire libre, especialmente durante las horas pico de contaminación. Mantén las ventanas cerradas y utiliza un purificador de aire en tu hogar. Utiliza una mascarilla de calidad cuando salgas y sigue un plan de acción para enfermedades respiratorias proporcionado por tu médico.';
                     } else if (temperatureMax > 35 || (pm10Value > 60 || pm25Value > 35)) {
                         NiveldeRiesgo = 'Alto';
-                        posiblesEnfermedades = 'Posibles enfermedades: infección por el virus sincitial respiratorio (VSR), exacerbación de la enfermedad pulmonar obstructiva crónica (EPOC), infección por adenovirus.';
+                        PosiblesEnfermedades = 'Posibles enfermedades: infección por el virus sincitial respiratorio (VSR), exacerbación de la enfermedad pulmonar obstructiva crónica (EPOC), infección por adenovirus.';
                         RecomendacionesRiesgo = 'Evita actividades al aire libre, especialmente en lugares concurridos. Mantén las ventanas cerradas y utiliza un purificador de aire en interiores. Lávate las manos con frecuencia y evita tocarse la cara. Usa una mascarilla en lugares cerrados y concurridos. Mantén tu sistema inmunológico fuerte mediante una dieta saludable, ejercicio regular y suficiente sueño.';
                     } else if (pm10Value > 50 || pm25Value > 25 || humidity > 70) {
                         NiveldeRiesgo = 'Medio';
-                        posiblesEnfermedades = 'Posibles enfermedades: gripe.';
+                        PosiblesEnfermedades = 'Posibles enfermedades: gripe.';
                         RecomendacionesRiesgo = 'Limita tu tiempo al aire libre y evita lugares concurridos. Lávate las manos con frecuencia y evita tocarse la cara. Usa una mascarilla en lugares cerrados y concurridos. Mantén tu sistema inmunológico fuerte mediante una dieta saludable, ejercicio regular y suficiente sueño.';
                     } else {
                         NiveldeRiesgo = 'Bajo';
-                        posiblesEnfermedades = 'Las condiciones son favorables, pero sigue las recomendaciones de tu médico.';
+                        PosiblesEnfermedades = 'Las condiciones son favorables, pero sigue las recomendaciones de tu médico.';
                         RecomendacionesRiesgo = 'Mantén un estilo de vida saludable y sigue las pautas generales de prevención de enfermedades respiratorias.';
                     }
 
                     // Mostrar el nivel de riesgo en el contenedor
                     resultsContainer.innerHTML = `
                       <p>Riesgo de contraer enfermedades respiratorias: ${NiveldeRiesgo}</p>
-                      <p>${posiblesEnfermedades}</p>
+                      <p>${PosiblesEnfermedades}</p>
                       <p>Recomendaciones: ${RecomendacionesRiesgo}</p>
                     `;
                 })
