@@ -1,0 +1,90 @@
+/* Estilos para la pantalla de búsqueda */
+
+/* Fondo de pantalla */
+body {
+    background-color: #F9F9F9;
+  }
+  
+  /* Título */
+  #pantBusqueda h2 {
+    color: #333;
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  /* Botón volver al inicio */
+  #back-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #333;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Contenedor de búsqueda */
+  .busqueda-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  /* Selección de ciudad */
+  .busqueda-ciudad {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  #city-select {
+    height: 30px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  #city-select option[value=""] {
+    display: none;
+  }
+  
+  /* Resultados de la búsqueda */
+  #results {
+    margin-top: 10px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Selección de tipo de datos */
+  .busqueda-datos {
+    position: relative;
+  }
+  
+  #typeData-select {
+    position: relative;
+    top: 100%;
+    right: 0%;
+    z-index: 1;
+    height: 30px;
+    width: 150px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  #typeData-select option[value=""] {
+    display: none;
+  }
+  
