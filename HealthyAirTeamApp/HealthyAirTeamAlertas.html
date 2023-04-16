@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolenTracker - Inicio</title>
+  <link rel="stylesheet" href="css/InicioStyle.css">
+</head>
+<body>
+  <header style="color: rgb(255, 255, 255);font-size: 40px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">PolenTracker</header>
+  <div class="btn-container">
+    <button type="button" id="inicio" class="btn" style="font-size: 18px;" onclick="location.href='HealthyAirInicio.html'">Inicio</button>
+    <button type="button" id="alertas" class="btn" style="font-size: 18px;" onclick="location.href='PolenTracker-Alertas.html'" >Alertas</button>
+    <button type="button" id="busqueda" class="btn" style="font-size: 18px;"onclick="location.href='HealthyAirInicio.html'">Busqueda</button>
+    <button type="button" id="acercade" class="btn" style="font-size: 18px;"onclick="location.href='HealthyAirInicio.html'">Acerca de</button>
+    <button type="button" id="ajustes" class="btn" style="font-size: 18px;"onclick="location.href='HealthyAirInicio.html'">Ajustes</button>
+
+    <div id="resultados"></div>
+  </div>
+  <div class="contenedor">
+    
+    
+    <div id="pantAlertas" class="pantalla" style="width: 100%; display: block;">
+        <div style="display: flex;">
+            <div style="flex-grow: 2; text-align: justify; max-width: 870px; padding-left: 60px; padding-top: 0px;">
+              <h2 style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Alertas</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      const cities = {
+        'Albacete': '02003',
+        'Almería': '04013',
+        'Araba/Álava': '01001',
+        'Alicante/Alacant': '03014',
+        'Asturias': '33003',
+        'Ávila': '05019',
+        'Badajoz': '06015',
+        'Islas Baleares': '07040',
+        'Barcelona': '08019',
+        'Bizkaia': '48020',
+        'Burgos': '09059',
+        'Cáceres': '10039',
+        'Cádiz': '11012',
+        'Cantabria': '39075',
+        'Castellón': '12040',
+        'Ceuta': '51001',
+        'Ciudad Real': '13038',
+        'Córdoba': '14021',
+        'A Coruña': '15030',
+        'Cuenca': '16069',
+        'Gipuzkoa': '20069',
+        'Girona': '17079',
+        'Granada': '18087',
+        'Guadalajara': '19087',
+        'Huelva': '21041',
+        'Huesca': '22120',
+        'Jaén': '23050',
+        'León': '24089',
+        'Lugo': '27028',
+        'Lleida': '25120',
+        'Madrid': '28079',
+        'Málaga': '29067',
+        'Melilla': '52001',
+        'Murcia': '30030',
+        'Navarra': '31201',
+        'Ourense': '32054',
+        'Palencia': '34120',
+        'Pontevedra': '36038',
+        'La Rioja': '26089',
+        'Salamanca': '37274',
+        'Santa Cruz de Tenerife': '38038',
+        'Segovia': '40004',
+        'Sevilla': '41091',
+        'Soria': '42173',
+        'Tarragona': '43148',
+        'Teruel': '44135',
+        'Toledo': '45168',
+        'Valencia': '46250',
+        'Valladolid': '47186',
+        'Zamora': '49275',
+        'Zaragoza': '50297'
+      };
+      fetch('https://api.openaq.org/v1/latest?country=ES&limit=10000')
+    .then(response => response.json())
+    .then(data => {
+      const contenedorResultados = document.getElementById('pantAlertas');
+      const listaCiudades = document.createElement('ul');
+
+      data.results.forEach(airQualityData => {
+        const cityName = airQualityData.city;
+
+        const pm10 = airQualityData.measurements.find(measurement => measurement.parameter === 'pm10');
+        const pm25 = airQualityData.measurements.find(measurement => measurement.parameter === 'pm25');
+        const pm10Value = pm10 ? pm10.value : null;
+        const pm25Value = pm25 ? pm25.value : null;
+
+        if (pm10Value > 75 || pm25Value > 50) {
+          const cityCode = cities[cityName];
+          const AlertasweatherPromise = fetch(`https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/${cityCode}/?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpc2FhY2dsMTcxQGdtYWlsLmNvbSIsImp0aSI6IjQ2MDE2ZjM1LTk5OTMtNGExOC05N2I1LTNkYWQzYWQ5YjMzZiIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjgwOTUzNTc5LCJ1c2VySWQiOiI0NjAxNmYzNS05OTkzLTRhMTgtOTdiNS0zZGFkM2FkOWIzM2YiLCJyb2xlIjoiIn0.V8aM7wP_togdxt7j74Wb5TS5iHi9NvXqY0Ebycu4YaA`)
+            .then(response => response.json())
+            .then(data => {
+              const datosUrl = data.datos;
+              return fetch(datosUrl);
+            })
+            .then(response => response.json());
+
+            AlertasweatherPromise
+            .then(weatherData => {
+              
+
+              const itemCiudad = document.createElement('div');
+              itemCiudad.classList.add('ciudad');
+              const resultadoHtml = `
+                <div>
+                  <p style="font-size: 18px;"><strong>ALERTA PICO DE NIVEL DE POLEN</strong></p>
+                  <p> Ciudad: ${cityName} </p>
+                  <p>Nivel de Polen: Muy alto</p>
+                  <p> Recomendaciones: Las condiciones son desfavorables para los alérgicos al polen. Evita salir al aire libre, mantén las ventanas cerradas y utiliza un purificador de aire. </p>
+                </div>`;
+              itemCiudad.innerHTML = resultadoHtml;
+              listaCiudades.appendChild(itemCiudad);
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        }
+      });
+
+      contenedorResultados.appendChild(listaCiudades);
+    })
+    .catch(error => {
+      console.error(error);
+      contenedorResultados.innerHTML = 'Hubo un error al buscar los resultados';
+    });
+</script>
+
+  
+ 
+
+    
+
+    <div id="pantAjustes" class="pantalla" style="text-align: center; align-items: center; width: 100%;">
+        <div style="display: flex; width: 100%;">
+            <div style="flex-grow: 2; text-align: justify; max-width: 1500px; padding-left: 60px; padding-top: 0px;">
+              <h2 style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Ajustes</h2>
+              <p>Modificar el tamaño del texto:</p>
+              <div style="text-align: left;">
+                <div>
+                  <button onclick="aumentarTexto()" style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Aumentar tamaño del texto</button>
+                  <button onclick="reducirTexto()" style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Reducir tamaño del texto</button>
+                  <button onclick="restablecerTextoSize()" style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer tamaño del texto</button>
+                </div>                
+              </div>
+              <p>Modificar la fuente del texto:</p>
+              <div style="text-align: left;">
+                <div>
+                  <button onclick="cambiarFuenteTexto()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Modificar fuente del texto</button>
+                  <button onclick="restablecerFuenteTexto()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer fuente del texto</button>  
+                </div>
+              </div>
+              <p>Modificar los colores de la web:</p>
+              <div style="text-align: left;">
+                <div>
+                  <button onclick="document.body.classList.add('grayscale')" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Convertir a blanco y negro</button>
+	                <button onclick="document.body.classList.remove('grayscale')" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer colores</button>
+                </div>
+              </div>
+              <p>Modificar el modo de la web:</p>
+              <div style="text-align: left; padding-bottom: 40px;">
+                <div>
+                  <button onclick="activarModoOscuro()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Activar modo oscuro</button>
+                  <button onclick="restablecerModoNormal()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer modo normal</button>
+                </div>
+              </div>
+
+              <style>
+                body {
+                  transition: all 1s ease;
+                }
+                
+                .grayscale {
+                  filter: grayscale(100%);
+                }
+              </style>
+              
+            </div>
+        </div>
+    </div>
+
+  
+</body>
+</html>
