@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PolenTracker - Inicio</title>
+  <title>HealthyAirTeam - Inicio</title>
   <link rel="stylesheet" href="css/InicioStyle.css">
 </head>
+
 <body>
-  <header style="color: rgb(255, 255, 255);font-size: 40px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">PolenTracker</header>
+  <header
+    style="color: rgb(255, 255, 255);font-size: 40px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+    HealthyAirTeam</header>
   <div class="btn-container">
-    <button type="button" id="inicio" class="btn" style="font-size: 18px;" onclick="location.href='HealthyAirInicio.html'">Inicio</button>
-    <button type="button" id="alertas" class="btn" style="font-size: 18px;" onclick="location.href='PolenTracker-Alertas.html'" >Alertas</button>
-    <button type="button" id="busqueda" class="btn" style="font-size: 18px;"onclick="location.href='HealthyAirInicio.html'">Busqueda</button>
-    <button type="button" id="acercade" class="btn" style="font-size: 18px;"onclick="location.href='HealthyAirInicio.html'">Acerca de</button>
-    <button type="button" id="ajustes" class="btn" style="font-size: 18px;"onclick="location.href='HealthyAirInicio.html'">Ajustes</button>
+    <button type="button" id="inicio" class="btn" style="font-size: 18px;"
+      onclick="location.href='HealthyAirInicio.html'">Inicio</button>
+    <button type="button" id="alertas" class="btn" style="font-size: 18px;"
+      onclick="location.href='HealthyAirTeamAlertas.html'">Alertas</button>
+    <button type="button" id="busqueda" class="btn" style="font-size: 18px;"
+      onclick="location.href='HealthyAirInicio.html'">Busqueda</button>
+    <button type="button" id="acercade" class="btn" style="font-size: 18px;"
+      onclick="location.href='HealthyAirInicio.html'">Acerca de</button>
+    <button type="button" id="ajustes" class="btn" style="font-size: 18px;"
+      onclick="location.href='HealthyAirInicio.html'">Ajustes</button>
 
     <div id="resultados"></div>
   </div>
   <div class="contenedor">
-    
-    
+
+
     <div id="pantAlertas" class="pantalla" style="width: 100%; display: block;">
-        <div style="display: flex;">
-            <div style="flex-grow: 2; text-align: justify; max-width: 870px; padding-left: 60px; padding-top: 0px;">
-              <h2 style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Alertas</h2>
-            </div>
+      <div style="display: flex;">
+        <div style="flex-grow: 2; text-align: justify; max-width: 870px; padding-left: 60px; padding-top: 0px;">
+          <h2
+            style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
+            Alertas</h2>
         </div>
+      </div>
     </div>
 
     <script>
@@ -83,112 +94,157 @@
         'Zaragoza': '50297'
       };
       fetch('https://api.openaq.org/v1/latest?country=ES&limit=10000')
-    .then(response => response.json())
-    .then(data => {
-      const contenedorResultados = document.getElementById('pantAlertas');
-      const listaCiudades = document.createElement('ul');
+        .then(response => response.json())
+        .then(data => {
+          const contenedorResultados = document.getElementById('pantAlertas');
+          const listaCiudades = document.createElement('ul');
 
-      data.results.forEach(airQualityData => {
-        const cityName = airQualityData.city;
+          data.results.forEach(airQualityData => {
+            const cityName = airQualityData.city;
 
-        const pm10 = airQualityData.measurements.find(measurement => measurement.parameter === 'pm10');
-        const pm25 = airQualityData.measurements.find(measurement => measurement.parameter === 'pm25');
-        const pm10Value = pm10 ? pm10.value : null;
-        const pm25Value = pm25 ? pm25.value : null;
+            const pm10 = airQualityData.measurements.find(measurement => measurement.parameter === 'pm10');
+            const pm25 = airQualityData.measurements.find(measurement => measurement.parameter === 'pm25');
+            const pm10Value = pm10 ? pm10.value : null;
+            const pm25Value = pm25 ? pm25.value : null;
 
-        if (pm10Value > 75 || pm25Value > 50) {
-          const cityCode = cities[cityName];
-          const AlertasweatherPromise = fetch(`https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/${cityCode}/?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpc2FhY2dsMTcxQGdtYWlsLmNvbSIsImp0aSI6IjQ2MDE2ZjM1LTk5OTMtNGExOC05N2I1LTNkYWQzYWQ5YjMzZiIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjgwOTUzNTc5LCJ1c2VySWQiOiI0NjAxNmYzNS05OTkzLTRhMTgtOTdiNS0zZGFkM2FkOWIzM2YiLCJyb2xlIjoiIn0.V8aM7wP_togdxt7j74Wb5TS5iHi9NvXqY0Ebycu4YaA`)
-            .then(response => response.json())
-            .then(data => {
-              const datosUrl = data.datos;
-              return fetch(datosUrl);
-            })
-            .then(response => response.json());
+            if (pm10Value > 75 || pm25Value > 50) {
+              const cityCode = cities[cityName];
+              const AlertasweatherPromise = fetch(`https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/${cityCode}/?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpc2FhY2dsMTcxQGdtYWlsLmNvbSIsImp0aSI6IjQ2MDE2ZjM1LTk5OTMtNGExOC05N2I1LTNkYWQzYWQ5YjMzZiIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjgwOTUzNTc5LCJ1c2VySWQiOiI0NjAxNmYzNS05OTkzLTRhMTgtOTdiNS0zZGFkM2FkOWIzM2YiLCJyb2xlIjoiIn0.V8aM7wP_togdxt7j74Wb5TS5iHi9NvXqY0Ebycu4YaA`)
+                .then(response => response.json())
+                .then(data => {
+                  const datosUrl = data.datos;
+                  return fetch(datosUrl);
+                })
+                .then(response => response.json());
 
-            AlertasweatherPromise
-            .then(weatherData => {
-              
+              AlertasweatherPromise
+                .then(weatherData => {
+                  const temperatureMax = weatherData[0].prediccion.dia[0].temperatura.maxima;
+                  const humidity = weatherData[0].prediccion.dia[0].humedadRelativa.maxima;
 
-              const itemCiudad = document.createElement('div');
-              itemCiudad.classList.add('ciudad');
-              const resultadoHtml = `
+                  let NiveldeRiesgo = '';
+                  let RecomendacionesRiesgo = '';
+                  let PosiblesEnfermedades = '';
+
+                  if (pm10Value > 75 || pm25Value > 50) {
+                    NiveldeRiesgo = 'Muy alto';
+                    PosiblesEnfermedades = 'Posibles enfermedades: neumonía, bronquitis aguda, exacerbación del asma.';
+                    RecomendacionesRiesgo = 'Las condiciones son desfavorables para las personas con enfermedades respiratorias. Evita salir al aire libre, especialmente durante las horas pico de contaminación. Mantén las ventanas cerradas y utiliza un purificador de aire en tu hogar. Utiliza una mascarilla de calidad cuando salgas y sigue un plan de acción para enfermedades respiratorias proporcionado por tu médico.';
+                  } else if (temperatureMax > 35 || (pm10Value > 60 || pm25Value > 35)) {
+                    NiveldeRiesgo = 'Alto';
+                    PosiblesEnfermedades = 'Posibles enfermedades: infección por el virus sincitial respiratorio (VSR), exacerbación de la enfermedad pulmonar obstructiva crónica (EPOC), infección por adenovirus.';
+                    RecomendacionesRiesgo = 'Evita actividades al aire libre, especialmente en lugares concurridos. Mantén las ventanas cerradas y utiliza un purificador de aire en interiores. Lávate las manos con frecuencia y evita tocarse la cara. Usa una mascarilla en lugares cerrados y concurridos. Mantén tu sistema inmunológico fuerte mediante una dieta saludable, ejercicio regular y suficiente sueño.';
+                  } else if (pm10Value > 50 || pm25Value > 25 || humidity > 70) {
+                    NiveldeRiesgo = 'Medio';
+                    PosiblesEnfermedades = 'Posibles enfermedades: gripe.';
+                    RecomendacionesRiesgo = 'Limita tu tiempo al aire libre y evita lugares concurridos. Lávate las manos con frecuencia y evita tocarse la cara. Usa una mascarilla en lugares cerrados y concurridos. Mantén tu sistema inmunológico fuerte mediante una dieta saludable, ejercicio regular y suficiente sueño.';
+                  } else {
+                    NiveldeRiesgo = 'Bajo';
+                    PosiblesEnfermedades = 'Las condiciones son favorables, pero sigue las recomendaciones de tu médico.';
+                    RecomendacionesRiesgo = 'Mantén un estilo de vida saludable y sigue las pautas generales de prevención de enfermedades respiratorias.';
+                  }
+
+                  const itemCiudad = document.createElement('div');
+                  itemCiudad.classList.add('ciudad');
+                  const resultadoHtml = `
                 <div>
-                  <p style="font-size: 18px;"><strong>ALERTA PICO DE NIVEL DE POLEN</strong></p>
+                  <p style="font-size: 18px;"><strong>ALERTA PICO DE CONTAMINACION</strong></p>
                   <p> Ciudad: ${cityName} </p>
-                  <p>Nivel de Polen: Muy alto</p>
-                  <p> Recomendaciones: Las condiciones son desfavorables para los alérgicos al polen. Evita salir al aire libre, mantén las ventanas cerradas y utiliza un purificador de aire. </p>
+                  <p>Nivel de Riesgo: ${NiveldeRiesgo}</p>
+                  <p> Posibles enfermedades : ${PosiblesEnfermedades} </p>
+                  <p> Recomendaciones: ${RecomendacionesRiesgo}</p>
                 </div>`;
-              itemCiudad.innerHTML = resultadoHtml;
-              listaCiudades.appendChild(itemCiudad);
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        }
-      });
+                  itemCiudad.innerHTML = resultadoHtml;
+                  listaCiudades.appendChild(itemCiudad);
+                })
+                .catch(error => {
+                  console.error(error);
+                });
+            }
+          });
 
-      contenedorResultados.appendChild(listaCiudades);
-    })
-    .catch(error => {
-      console.error(error);
-      contenedorResultados.innerHTML = 'Hubo un error al buscar los resultados';
-    });
-</script>
+          contenedorResultados.appendChild(listaCiudades);
+        })
+        .catch(error => {
+          console.error(error);
+          contenedorResultados.innerHTML = 'Hubo un error al buscar los resultados';
+        });
+    </script>
 
-  
- 
 
-    
+
+
+
 
     <div id="pantAjustes" class="pantalla" style="text-align: center; align-items: center; width: 100%;">
-        <div style="display: flex; width: 100%;">
-            <div style="flex-grow: 2; text-align: justify; max-width: 1500px; padding-left: 60px; padding-top: 0px;">
-              <h2 style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Ajustes</h2>
-              <p>Modificar el tamaño del texto:</p>
-              <div style="text-align: left;">
-                <div>
-                  <button onclick="aumentarTexto()" style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Aumentar tamaño del texto</button>
-                  <button onclick="reducirTexto()" style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Reducir tamaño del texto</button>
-                  <button onclick="restablecerTextoSize()" style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer tamaño del texto</button>
-                </div>                
-              </div>
-              <p>Modificar la fuente del texto:</p>
-              <div style="text-align: left;">
-                <div>
-                  <button onclick="cambiarFuenteTexto()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Modificar fuente del texto</button>
-                  <button onclick="restablecerFuenteTexto()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer fuente del texto</button>  
-                </div>
-              </div>
-              <p>Modificar los colores de la web:</p>
-              <div style="text-align: left;">
-                <div>
-                  <button onclick="document.body.classList.add('grayscale')" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Convertir a blanco y negro</button>
-	                <button onclick="document.body.classList.remove('grayscale')" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer colores</button>
-                </div>
-              </div>
-              <p>Modificar el modo de la web:</p>
-              <div style="text-align: left; padding-bottom: 40px;">
-                <div>
-                  <button onclick="activarModoOscuro()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Activar modo oscuro</button>
-                  <button onclick="restablecerModoNormal()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer modo normal</button>
-                </div>
-              </div>
-
-              <style>
-                body {
-                  transition: all 1s ease;
-                }
-                
-                .grayscale {
-                  filter: grayscale(100%);
-                }
-              </style>
-              
+      <div style="display: flex; width: 100%;">
+        <div style="flex-grow: 2; text-align: justify; max-width: 1500px; padding-left: 60px; padding-top: 0px;">
+          <h2
+            style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
+            Ajustes</h2>
+          <p>Modificar el tamaño del texto:</p>
+          <div style="text-align: left;">
+            <div>
+              <button onclick="aumentarTexto()"
+                style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Aumentar
+                tamaño del texto</button>
+              <button onclick="reducirTexto()"
+                style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Reducir tamaño
+                del texto</button>
+              <button onclick="restablecerTextoSize()"
+                style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer
+                tamaño del texto</button>
             </div>
+          </div>
+          <p>Modificar la fuente del texto:</p>
+          <div style="text-align: left;">
+            <div>
+              <button onclick="cambiarFuenteTexto()"
+                style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Modificar
+                fuente del texto</button>
+              <button onclick="restablecerFuenteTexto()"
+                style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer
+                fuente del texto</button>
+            </div>
+          </div>
+          <p>Modificar los colores de la web:</p>
+          <div style="text-align: left;">
+            <div>
+              <button onclick="document.body.classList.add('grayscale')"
+                style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Convertir a
+                blanco y negro</button>
+              <button onclick="document.body.classList.remove('grayscale')"
+                style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer
+                colores</button>
+            </div>
+          </div>
+          <p>Modificar el modo de la web:</p>
+          <div style="text-align: left; padding-bottom: 40px;">
+            <div>
+              <button onclick="activarModoOscuro()"
+                style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Activar modo
+                oscuro</button>
+              <button onclick="restablecerModoNormal()"
+                style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer
+                modo normal</button>
+            </div>
+          </div>
+
+          <style>
+            body {
+              transition: all 1s ease;
+            }
+
+            .grayscale {
+              filter: grayscale(100%);
+            }
+          </style>
+
         </div>
+      </div>
     </div>
 
-  
+
 </body>
+
 </html>
