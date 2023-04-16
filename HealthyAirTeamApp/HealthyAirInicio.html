@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolenTracker - Inicio</title>
+  <link rel="stylesheet" href="css/InicioStyle.css">
+</head>
+<body>
+  <header style="color: rgb(255, 255, 255);font-size: 40px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">HealthyAirTeam</header>
+  <div class="btn-container">
+    <button type="button" id="inicio" class="btn" style="font-size: 18px;">Inicio</button>
+    <button type="button" id="Alertas Contaminación" class="btn" style="font-size: 18px;"  onclick="location.href='HealthyAirTeamAlertas.html'">Alerta Contaminación</button>
+    <button type="button" id="busqueda" class="btn" style="font-size: 18px;">Busqueda</button>
+    <button type="button" id="acercade" class="btn" style="font-size: 18px;">Enfermedades Respiratorias</button>
+    <button type="button" id="ajustes" class="btn" style="font-size: 18px;">Ajustes</button>
+
+    <div id="resultados"></div>
+  </div>
+  <div class="contenedor">
+    <div id="pantInicio" class="pantalla" style="text-align: center; width: 100%;">
+      
+      <div style="display: flex; width: 100%;">
+        <div style="flex-grow: 2; text-align: justify; width: 100%; padding-left: 60px; padding-top: 0px;">
+          <h2 style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Sobre nosotros</h2>
+          <p id="textoSobreNosotros1" style="font-size: 16px;">PolenTracker es un proyecto diseñado para ayudar a las personas que sufren de alergias y asma a mejorar su calidad de vida proporcionándoles información precisa y oportuna sobre la calidad del aire y los niveles de polen en sus regiones.</p>
+          <p id="textoSobreNosotros2" style="font-size: 16px;">Además, se pretende ayudar a los usuarios a anticiparse a los brotes alérgicos y tomar medidas preventivas, lo que podría reducir la necesidad de medicamentos y visitas médicas. La creación de esta aplicación también podría fomentar la conciencia sobre la importancia de la calidad del aire y la necesidad de proteger el medio ambiente.</p>
+        </div>
+        <div style="padding-left: 40px;">
+          <img style = "padding-right: 40px; max-width: 400px; padding-top: 40px;" src="https://www.gesundheitsstadt-berlin.de/fileadmin/_processed_/f/e/csm_Graeser_Pollen_Heuschnupfen_851862fb18.jpg" alt="Imagen" style="width: 400px; height: 300px;">
+        </div>
+      </div>
+
+      <div style="display: flex; width: 100%;">
+        <div style="flex-grow: 2; padding-right: 40px;">
+          <img style = "padding-left: 60px; max-width: 400px;" src="https://blog.bioquimica.cl/wp-content/uploads/2017/09/imagen-destacada-post-polen.jpg" alt="Imagen" style="width: 400px; height: 300px;">
+        </div>
+        <div style="text-align: justify; width: 100%; padding-left: 10px; padding-right: 60px; padding-top: 50px;">
+          <p id="textoSobreNosotros3" style="font-size: 16px;">Nuestra plataforma es fácil de usar y proporciona información clara y detallada sobre los niveles de polen en España. Además, ofrecemos recomendaciones personalizadas basadas en los datos obtenidos para ayudar a los usuarios a reducir los efectos alérgicos y mejorar su calidad de vida.</p>
+          <p id="textoSobreNosotros4" style="font-size: 16px;">¡Únete a nosotros en PolenTracker y comienza a respirar más fácilmente!</p>
+        </div>
+      </div>
+      
+    </div>
+    
+
+  <div id="pantBusqueda" class="pantalla" style="text-align: center; width: 100%;">
+    <div style="display: flex; flex-direction: row; padding-left: 60px; padding-top: 0px;  width: 100%;">
+      <h2 style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Busqueda</h2>
+  
+        <div class="busqueda-ciudad" style="width: 50%; text-align: justify; max-width: 435px; padding-left: 60px; padding-top: 94px;">
+          <p>Selecciona una ciudad:</p>
+          <select id="city-select" style="height: 30px; width: 300px;">
+            <option value="">Seleccionar</option>
+          </select>
+          <div id="results"></div>
+        </div>
+        <div class="busqueda-datos" style="width: 50%; text-align: justify; max-width: 435px; padding-left: 60px; padding-top: 0px;">
+          <p style="padding-top: 92.5px;">Selecciona el tipo de datos:</p>
+          <select id="typeData-select" style="height: 30px; width: 300px;">
+            <option value="">Seleccionar</option>
+            <option value="calidad-aire">Calidad del aire</option>
+            <option value="calidad-tiempo">Calidad del Tiempo</option>
+            <option value="nivel-polen">Nivel del Polen</option>
+          </select>
+        </div>
+      
+    </div>
+  </div>
+  <script src="BusquedaScriptOpenaq.js"></script>
+  <script src="BusquedaScriptAemet.js"></script>
+  <script src="BusquedaPolen.js"></script>
+
+    <div id="pantAcercade" class="pantalla" style="text-align: center; align-items: center; width: 100%;">
+        <div style="display: flex; width: 100%;">
+            <div style="flex-grow: 2; text-align: justify; width: 100%; padding-left: 60px; padding-top: 0px; padding-right: 50px;">
+              <h2 style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Acerca de</h2>
+              <h3 style="color: rgb(209, 102, 52);font-size: 25px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Historia y Trayectoria</h3>
+              <p>Nuestra página web ha sido fundada en el año 2023 con el objetivo de brindar a los usuarios información precisa y actualizada sobre los niveles de polen en su zona, así como ofrecer recomendaciones basadas en los datos obtenidos para ayudar a reducir los efectos alérgicos. Nos enfocamos en utilizar las APIs de OpenAQ y AEMET para recopilar los datos necesarios y presentarlos de manera clara y fácil de entender.</p>
+              <h3 style="color: rgb(209, 102, 52);font-size: 25px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Misión y Visión</h3>
+              <p>Nuestra misión es mejorar la calidad de vida de las personas al brindar información precisa y actualizada sobre los niveles de polen en su zona y ofrecer recomendaciones para reducir los efectos alérgicos. Nuestra visión es convertirnos en la principal fuente de información sobre los niveles de polen y la prevención de alergias en España.</p>
+              <h3 style="color: rgb(209, 102, 52);font-size: 25px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Equipo de Trabajo</h3>
+              <p>Contamos con un equipo de expertos en desarrollo web y análisis de datos que trabajan incansablemente para garantizar que nuestra página web brinde información precisa y actualizada a nuestros usuarios.</p>
+              <h3 style="color: rgb(209, 102, 52);font-size: 25px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Logros y Reconocimientos</h3>
+              <p>Hasta la fecha, nuestra página web ha recibido elogios y reconocimientos de varios medios de comunicación y organizaciones en la lucha contra las alergias. También hemos sido reconocidos por nuestra capacidad para presentar datos complejos de manera clara y accesible para nuestros usuarios.</p>
+              <h3 style="color: rgb(209, 102, 52);font-size: 25px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Política de Privacidad y Términos de Uso</h3>
+              <p>Nuestra página web se compromete a proteger la privacidad de nuestros usuarios y cumplir con todas las leyes y regulaciones aplicables.</p>
+              <h3 style="color: rgb(209, 102, 52);font-size: 25px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Contacto y Medios de Comunicación</h3>
+              <p>Para comunicarse con nosotros, puede enviar un correo electrónico a nuestro equipo de soporte técnico (info@polentracker.com) o seguirnos en nuestras redes sociales. También puede encontrar información de contacto detallada en nuestra página web.</p>
+              <h3 style="color: rgb(209, 102, 52);font-size: 25px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Patrocinadores o Socios Colaboradores</h3>
+              <p>En nuestra página web no contamos con patrocinadores o socios colaboradores externos en este momento. Todos nuestros esfuerzos y recursos están dedicados a brindar la mejor experiencia de usuario posible y mejorar nuestros servicios.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="pantAjustes" class="pantalla" style="text-align: center; align-items: center; width: 100%;">
+        <div style="display: flex; width: 100%;">
+            <div style="flex-grow: 2; text-align: justify; max-width: 1500px; padding-left: 60px; padding-top: 0px;">
+              <h2 style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Ajustes</h2>
+              <p>Modificar el tamaño del texto:</p>
+              <div style="text-align: left;">
+                <div>
+                  <button onclick="aumentarTexto()" style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Aumentar tamaño del texto</button>
+                  <button onclick="reducirTexto()" style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Reducir tamaño del texto</button>
+                  <button onclick="restablecerTextoSize()" style="display: inline-block; margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer tamaño del texto</button>
+                </div>                
+              </div>
+              <p>Modificar la fuente del texto:</p>
+              <div style="text-align: left;">
+                <div>
+                  <button onclick="cambiarFuenteTexto()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Modificar fuente del texto</button>
+                  <button onclick="restablecerFuenteTexto()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer fuente del texto</button>  
+                </div>
+              </div>
+              <p>Modificar los colores de la web:</p>
+              <div style="text-align: left;">
+                <div>
+                  <button onclick="document.body.classList.add('grayscale')" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Convertir a blanco y negro</button>
+	                <button onclick="document.body.classList.remove('grayscale')" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer colores</button>
+                </div>
+              </div>
+              <p>Modificar el modo de la web:</p>
+              <div style="text-align: left; padding-bottom: 40px;">
+                <div>
+                  <button onclick="activarModoOscuro()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Activar modo oscuro</button>
+                  <button onclick="restablecerModoNormal()" style="display: inline-block;  margin-right: 30px; border-radius: 10px; max-width: 225px;">Restablecer modo normal</button>
+                </div>
+              </div>
+
+              <style>
+                body {
+                  transition: all 1s ease;
+                }
+                
+                .grayscale {
+                  filter: grayscale(100%);
+                }
+              </style>
+              
+            </div>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      const btns = document.querySelectorAll('.btn');
+      const pantallas = document.querySelectorAll('.pantalla');
+
+      for (let i = 0; i < btns.length; i++) {
+          btns[i].addEventListener('click', () => {
+            
+              for (let j = 0; j < pantallas.length; j++) {
+                  pantallas[j].style.display = 'none';
+              }
+
+              if (btns[i].id === 'inicio') {
+                  document .getElementById('pantInicio').style.display = 'block';
+              } else if (btns[i].id === 'alertas') {
+                  document.getElementById('pantAlertas').style.display = 'block';
+              } else if (btns[i].id === 'busqueda') {
+                  document.getElementById('pantBusqueda').style.display = 'block';
+              } else if (btns[i].id === 'acercade') {
+                  document.getElementById('pantAcercade').style.display = 'block';
+              } else if (btns[i].id === 'ajustes') {
+                  document.getElementById('pantAjustes').style.display = 'block';
+              }
+          });
+    }
+      
+  </script>
+</body>
+</html>
