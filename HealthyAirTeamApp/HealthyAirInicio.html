@@ -5,35 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PolenTracker - Inicio</title>
   <link rel="stylesheet" href="css/InicioStyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Raleway:wght@900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
+
 </head>
 <body>
-  <header style="color: rgb(255, 255, 255);font-size: 40px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">HealthyAirTeam</header>
+  <header style="color: rgb(255, 255, 255);font-size: 40px; font-family: 'Montserrat', sans-serif;">
+    <h1>HealthyAirTeam</h1>
+    <div class="circulo"></div>
+    
+  </header>
   <div class="btn-container">
-    <button type="button" id="inicio" class="btn" style="font-size: 18px;">Inicio</button>
-    <button type="button" id="Alertas Contaminación" class="btn" style="font-size: 18px;"  onclick="location.href='HealthyAirTeamAlertas.html'">Alerta Contaminación</button>
-    <button type="button" id="busqueda" class="btn" style="font-size: 18px;">Busqueda</button>
-    <button type="button" id="acercade" class="btn" style="font-size: 18px;">Enfermedades Respiratorias</button>
-    <button type="button" id="ajustes" class="btn" style="font-size: 18px;">Ajustes</button>
-
-    <div id="resultados"></div>
+    <div class="btn-container-left">
+      <button type="button" id="inicio" class="btn" onclick="location.href='HealthyAirInicio.html'">Inicio</button>
+      <button type="button" id="Alertas" class="btn" onclick="location.href='HealthyAirTeamAlertas.html'">Alertas</button>
+      <div id="resultados"></div>
+    </div>
+    <div class="btn-container-right">
+      <button type="button" id="busqueda" class="btn" >Búsquedas</button>
+      <button type="button" id="acercade" class="btn" >Sobre nosotros</button>
+      <div id="resultados"></div>
+    </div>
   </div>
-  <div class="contenedor">
+  <div class="contenedor" style="margin-top: 30px;">
     <div id="pantInicio" class="pantalla" style="text-align: center; width: 100%;">
       
-      <div style="display: flex; width: 100%;">
+      <div style="display: flex; width: 100%; margin-bottom: 30px;">
         <div style="flex-grow: 2; text-align: justify; width: 100%; padding-left: 60px; padding-top: 0px;">
           <h2 style="color: rgb(209, 102, 52);font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Sobre nosotros</h2>
           <p id="textoSobreNosotros1" style="font-size: 16px;">PolenTracker es un proyecto diseñado para ayudar a las personas que sufren de alergias y asma a mejorar su calidad de vida proporcionándoles información precisa y oportuna sobre la calidad del aire y los niveles de polen en sus regiones.</p>
           <p id="textoSobreNosotros2" style="font-size: 16px;">Además, se pretende ayudar a los usuarios a anticiparse a los brotes alérgicos y tomar medidas preventivas, lo que podría reducir la necesidad de medicamentos y visitas médicas. La creación de esta aplicación también podría fomentar la conciencia sobre la importancia de la calidad del aire y la necesidad de proteger el medio ambiente.</p>
         </div>
         <div style="padding-left: 40px;">
-          <img style = "padding-right: 40px; max-width: 400px; padding-top: 40px;" src="https://www.gesundheitsstadt-berlin.de/fileadmin/_processed_/f/e/csm_Graeser_Pollen_Heuschnupfen_851862fb18.jpg" alt="Imagen" style="width: 400px; height: 300px;">
+          <img style = "padding-right: 40px; max-width: 400px; padding-top: 40px; border-radius: 15px;" src="https://www.gesundheitsstadt-berlin.de/fileadmin/_processed_/f/e/csm_Graeser_Pollen_Heuschnupfen_851862fb18.jpg" alt="Imagen" style="width: 400px; height: 300px;">
         </div>
       </div>
 
       <div style="display: flex; width: 100%;">
         <div style="flex-grow: 2; padding-right: 40px;">
-          <img style = "padding-left: 60px; max-width: 400px;" src="https://blog.bioquimica.cl/wp-content/uploads/2017/09/imagen-destacada-post-polen.jpg" alt="Imagen" style="width: 400px; height: 300px;">
+          <img style = "padding-left: 60px; max-width: 400px; border-radius: 15px;" src="https://blog.bioquimica.cl/wp-content/uploads/2017/09/imagen-destacada-post-polen.jpg" alt="Imagen" style="width: 400px; height: 300px;">
         </div>
         <div style="text-align: justify; width: 100%; padding-left: 10px; padding-right: 60px; padding-top: 50px;">
           <p id="textoSobreNosotros3" style="font-size: 16px;">Nuestra plataforma es fácil de usar y proporciona información clara y detallada sobre los niveles de polen en España. Además, ofrecemos recomendaciones personalizadas basadas en los datos obtenidos para ayudar a los usuarios a reducir los efectos alérgicos y mejorar su calidad de vida.</p>

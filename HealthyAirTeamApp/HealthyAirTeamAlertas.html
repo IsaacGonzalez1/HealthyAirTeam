@@ -6,30 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HealthyAirTeam - Inicio</title>
   <link rel="stylesheet" href="css/InicioStyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Raleway:wght@900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <header
-    style="color: rgb(255, 255, 255);font-size: 40px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
-    HealthyAirTeam</header>
+  <header style="color: rgb(255, 255, 255);font-size: 40px;">
+    <h1>HealthyAirTeam</h1>
+    <div class="circulo"></div>
+  </header>
   <div class="btn-container">
-    <button type="button" id="inicio" class="btn" style="font-size: 18px;"
-      onclick="location.href='HealthyAirInicio.html'">Inicio</button>
-    <button type="button" id="alertas" class="btn" style="font-size: 18px;"
-      onclick="location.href='HealthyAirTeamAlertas.html'">Alertas</button>
-    <button type="button" id="busqueda" class="btn" style="font-size: 18px;"
-      onclick="location.href='HealthyAirInicio.html'">Busqueda</button>
-    <button type="button" id="acercade" class="btn" style="font-size: 18px;"
-      onclick="location.href='HealthyAirInicio.html'">Acerca de</button>
-    <button type="button" id="ajustes" class="btn" style="font-size: 18px;"
-      onclick="location.href='HealthyAirInicio.html'">Ajustes</button>
-
-    <div id="resultados"></div>
+    <div class="btn-container-left">
+      <button type="button" id="inicio" class="btn" onclick="location.href='HealthyAirInicio.html'">Inicio</button>
+      <button type="button" id="Alertas" class="btn" onclick="location.href='HealthyAirTeamAlertas.html'">Alertas</button>
+      <div id="resultados"></div>
+    </div>
+    <div class="btn-container-right">
+      <button type="button" id="busqueda" class="btn" >Búsquedas</button>
+      <button type="button" id="acercade" class="btn" >Sobre nosotros</button>
+      <div id="resultados"></div>
+    </div>
   </div>
   <div class="contenedor">
 
 
-    <div id="pantAlertas" class="pantalla" style="width: 100%; display: block;">
+    <div id="pantAlertas" class="pantalla" style="width: 100%; display: block; border-radius: 10px">
       <div style="display: flex;">
         <div style="flex-grow: 2; text-align: justify; max-width: 870px; padding-left: 60px; padding-top: 0px;">
           <h2
@@ -147,7 +150,7 @@
                   const itemCiudad = document.createElement('div');
                   itemCiudad.classList.add('ciudad');
                   const resultadoHtml = `
-                <div>
+                <div style="border-radius: 15px;">
                   <p style="font-size: 18px;"><strong>ALERTA PICO DE CONTAMINACION</strong></p>
                   <p> Ciudad: ${cityName} </p>
                   <p>Nivel de Riesgo: ${NiveldeRiesgo}</p>
